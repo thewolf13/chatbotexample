@@ -1,8 +1,11 @@
 function linkify(text) {
+    var email_regex = /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi;
+
     var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-    return text.replace(urlRegex, function(url) {
-        return '<a href="' + url + '" target="_blank">' + url + '</a>';
-    });
+
+
+
+    return text.replace(urlRegex,'<a href="$1" target="_blank">$1</a>').replace(email_regex, '<a href="mailto:$1">$1</a>');
 }
 class Chatbot{
     constructor(vars){
