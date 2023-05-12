@@ -1,3 +1,9 @@
+function linkify(text) {
+    var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(urlRegex, function(url) {
+        return '<a href="' + url + '" target="_blank">' + url + '</a>';
+    });
+}
 class Chatbot{
     constructor(vars){
         this.args = vars
@@ -89,12 +95,12 @@ class Chatbot{
             textField.value=''
         });
     }
-
+    
     updateChatText(chatbox){
         var html = '';
         this.messages.slice().reverse().forEach(function(item){
             if(item.name==="Sam"){
-                html += '<div class = "messages__item messages__item--visitor">'+item.message+'</div>'
+                html += '<div class = "messages__item messages__item--visitor">'+linkify(item.message)+'</div>'
             }else{
                 html += '<div class = "messages__item messages__item--operator">'+item.message+'</div>'
 
